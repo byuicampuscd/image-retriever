@@ -1,11 +1,3 @@
-/**********************************
-* Loads the history tab right when
-* the window opens.
-**********************************/
-window.onload = function() {
-	loadHistory();
-};
-
 /******************************
 * Creates Cookie
 ******************************/
@@ -76,13 +68,13 @@ function searchFilms(value) {
 *****************/
 function loadHistory() {
    // Clears the history list
-   document.getElementById("history").getElementsByTagName("ul")[0].innerHTML = "";
+   document.querySelector("aside").getElementsByTagName("ul")[0].innerHTML = "";
 
    // Looks for Cookies of each microfilm
    for (var i = 0; i < records.length; i++) {
       var tempFilm = records[i].number;
       if (readCookie(tempFilm) !== null) {
-        document.getElementById("history").getElementsByTagName("ul")[0].innerHTML +=
+        document.querySelector("aside").getElementsByTagName("ul")[0].innerHTML +=
         '<li style="display: inline-block; list-style-type: none; width: 75px; height: 17px; margin: 5px; text-align: center; font-family: verdana, geneva; font-size: 10pt; color: #343434; cursor:pointer;" onclick="loadHis(' + tempFilm + ')"><a>' + tempFilm + '</a></li>';
       }
    }
@@ -180,3 +172,11 @@ function displayImg(searchResult) {
     }
   }
 }
+
+/**********************************
+* Loads the history tab right when
+* the window opens.
+**********************************/
+window.onload = function() {
+	loadHistory();
+};

@@ -21,20 +21,6 @@ var SCRIPTS_PATH = 'public/scripts/**/*.js',
     DIST_PATH = 'public/dist',
     SCSS_PATH = 'public/scss/**/*.scss';
 
-/*ROLLUP TEST*/
-
-var rollup = require('gulp-rollup');
-
-gulp.task('roll', function() {
-	gulp.src('./public/**/*.js')
-		.pipe(sourcemaps.init())
-		.pipe(rollup({
-			entry: './public/modules/import.js'
-		}))
-		.pipe(sourcemaps.write())
-		.pipe(gulp.dest(DIST_PATH))
-});
-
 /*
 Styles for SASS
 */
@@ -59,14 +45,14 @@ gulp.task('styles', function () {
 Scripts for ES6 and React
 */
 gulp.task('scripts', function () {
-    return gulp.src(SCRIPTS_PATH)
+    return gulp.src(['./public/scripts/image-records.js', SCRIPTS_PATH])
         .pipe(plumber(function (err) {
             console.log('Scripts Task Error ' + err);
             this.emit('end');
         }))
         .pipe(sourcemaps.init())
         .pipe(babel({
-            presets: ['latest', 'react']
+            presets: ['es2015', 'react']
         }))
         .pipe(uglify())
         .pipe(concat('scripts.js'))
@@ -96,13 +82,13 @@ gulp.task('stylesPro', function () {
 
 //Scripts
 gulp.task('scriptsPro', function () {
-    return gulp.src(SCRIPTS_PATH)
+    return gulp.src(['./public/scripts/image-records.js', SCRIPTS_PATH])
         .pipe(plumber(function (err) {
             console.log('Scripts Task Error ' + err);
             this.emit('end');
         }))
         .pipe(babel({
-            presets: ['latest', 'react']
+            presets: ['es2015', 'react']
         }))
         .pipe(uglify())
         .pipe(concat('scripts.js'))
@@ -111,14 +97,14 @@ gulp.task('scriptsPro', function () {
 });
 
 /*Delete the distribution folder*/
-gulp.task('clean', function() {
+gulp.task('clean', function () {
     return del.sync([
         DIST_PATH
     ]);
 });
 
 /*Zip up the public directory for sharing :)*/
-gulp.task('export', ['default'], function() {
+gulp.task('export', ['default'], function () {
     return gulp.src('public/**/*')
         .pipe(zip('website.zip'))
         .pipe(gulp.dest('./'))
