@@ -1041,7 +1041,7 @@ var records = [
 		"https://content.byui.edu/integ/gen/70559629-9e66-4559-9630-dd2f0fd22f0a/0/9.jpg",
 		"https://content.byui.edu/integ/gen/70559629-9e66-4559-9630-dd2f0fd22f0a/0/10.jpg"
 	]
-},	
+},
 {
 	"title": "Muhlenberg County Kentucky Deed Books 1, 3, and 4",
 	"number": "554993",
@@ -1065,7 +1065,7 @@ var records = [
 		"https://content.byui.edu/integ/gen/70559629-9e66-4559-9630-dd2f0fd22f0a/0/27.jpg",
 		"https://content.byui.edu/integ/gen/70559629-9e66-4559-9630-dd2f0fd22f0a/0/28.jpg"
 	]
-},		
+},
 {
 	"title": "Muhlenberg County Kentucky Deed Book 5 and 6 Part 1",
 	"number": "554994",
@@ -1074,7 +1074,7 @@ var records = [
 		"https://content.byui.edu/integ/gen/70559629-9e66-4559-9630-dd2f0fd22f0a/0/30.jpg",
 		"https://content.byui.edu/integ/gen/70559629-9e66-4559-9630-dd2f0fd22f0a/0/31.jpg",
 		"https://content.byui.edu/integ/gen/70559629-9e66-4559-9630-dd2f0fd22f0a/0/32.jpg",
-		"https://content.byui.edu/integ/gen/70559629-9e66-4559-9630-dd2f0fd22f0a/0/33.jpg",	
+		"https://content.byui.edu/integ/gen/70559629-9e66-4559-9630-dd2f0fd22f0a/0/33.jpg",
 		"https://content.byui.edu/integ/gen/70559629-9e66-4559-9630-dd2f0fd22f0a/0/34.jpg",
 		"https://content.byui.edu/integ/gen/70559629-9e66-4559-9630-dd2f0fd22f0a/0/35.jpg",
 		"https://content.byui.edu/integ/gen/70559629-9e66-4559-9630-dd2f0fd22f0a/0/36.jpg",

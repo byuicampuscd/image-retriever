@@ -1,0 +1,41 @@
+{
+  "name": "image-retriever",
+  "version": "1.0.0",
+  "description": "An application to fetch file locations to view.",
+  "main": "image-records.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/byuicampuscd/image-retriever.git"
+  },
+  "author": "Andrew Gremlich",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/byuicampuscd/image-retriever/issues"
+  },
+  "homepage": "https://github.com/byuicampuscd/image-retriever#readme",
+  "devDependencies": {
+    "babel-preset-latest": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-clean-css": "^2.0.13",
+    "gulp-concat": "^2.6.1",
+    "gulp-livereload": "^3.8.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-rollup": "^2.5.1",
+    "gulp-sass": "^2.3.2",
+    "gulp-size": "^2.1.0",
+    "gulp-sourcemaps": "^2.2.0",
+    "gulp-uglify": "^2.0.0",
+    "gulp-wrap": "^0.13.0",
+    "gulp-zip": "^3.2.0"
+  },
+  "dependencies": {
+    "static-server": "^2.0.3"
+  }
+}

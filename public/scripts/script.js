@@ -48,14 +48,14 @@ function eraseCookie(cName) {
 
 /*********************************
 * Search Films Function
-* Opens an XML, searches for 
+* Opens an XML, searches for
 * images stored in the resources
 * and returns the address to that
 * image.
 *********************************/
 function searchFilms(value) {
 	var searchResult = new Array();
-	
+
 	for (var i = 0; i < records.length; i++) {
 		var recordNum = records[i].number;
 		if (recordNum == value) {
@@ -65,7 +65,7 @@ function searchFilms(value) {
 			return searchResult;
 		}
 	}
-	
+
 	return "none";
 }
 
@@ -77,23 +77,23 @@ function searchFilms(value) {
 function loadHistory() {
    // Clears the history list
    document.getElementById("history").getElementsByTagName("ul")[0].innerHTML = "";
-   
+
    // Looks for Cookies of each microfilm
    for (var i = 0; i < records.length; i++) {
       var tempFilm = records[i].number;
       if (readCookie(tempFilm) !== null) {
-        document.getElementById("history").getElementsByTagName("ul")[0].innerHTML += 
+        document.getElementById("history").getElementsByTagName("ul")[0].innerHTML +=
         '<li style="display: inline-block; list-style-type: none; width: 75px; height: 17px; margin: 5px; text-align: center; font-family: verdana, geneva; font-size: 10pt; color: #343434; cursor:pointer;" onclick="loadHis(' + tempFilm + ')"><a>' + tempFilm + '</a></li>';
       }
    }
-   return "none"; 
+   return "none";
 }
 
 /******************************
 * When search button is pushed
 * it searches for a microfilm,
-* displays it if found, or 
-* error message if not, and 
+* displays it if found, or
+* error message if not, and
 * stores a link in a cookie.
 ******************************/
 function search() {
@@ -103,7 +103,7 @@ function search() {
 	   (document.getElementById('mfsb').value == "Type Film Number Here")) {
      return;
    }
-   
+
    // Searches for the number typed in the text box
    var searchResult = searchFilms(document.getElementById('mfsb').value);
    // Test result
@@ -113,15 +113,15 @@ function search() {
       resetPlaceholder(document.getElementById('mfsb'));
       return;
    }
-   
+
    // If a match is found, it displays it to the screen in an image viewer
    displayImg(searchResult);
-   
+
    // Creates a cookie with the name of the microfilm number
    createCookie(document.getElementById('mfsb').value,searchResult,120);
-   
+
    loadHistory();
-   
+
    // Resets the search box
    resetPlaceholder(document.getElementById('mfsb'));
 }
@@ -139,10 +139,10 @@ function loadHis(number) {
       document.getElementById("filmDis").innerHTML = '<p style="line-height: 400px; -webkit-touch-callout: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;">That microfilm has been removed, sorry.</p>';
       return;
    }
-   
+
    // If a match is found, it displays it to the screen in an image viewer
    displayImg(searchResult);
-   
+
 }
 
 /******************************
