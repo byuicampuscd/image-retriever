@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <title>Image Retriever</title>
+    <link rel="stylesheet" type="text/css" href="IRstyle.css" />
+</head>
+<body style="font-family: verdana, sans-serif;font-size: 12px;">
+
+<div id="main">
+    <h1>Microfilm Retriever</h1>
+    <hr />
+    <p>Search Films:
+        <input id="mfsb" style="color: grey;" onfocus="clearPlaceholder(this)" onblur="fillPlaceholder(this)" type="text" value="Type Film Number Here" />
+        <button class="sr" onclick="search()">Search</button>
+    </p>
+    <div id="filmDis"><img src="mrIcon.png" border="0" alt="" title="" style="width: 180px; padding-top: 100px;" /></div>
+</div>
+<div id="history">Search History:
+    <br />
+    <br />
+    <ul>&nbsp;</ul>
+</div>
+<script type="text/javascript" src="images.js"></script>
+<script type="text/javascript" src="ImageRetriever.js"></script>
+
+</body>

@@ -1,0 +1,157 @@
+html, body {
+   margin: 0px;
+   padding: 0px;
+   height: 100%;
+   min-width: 600px;
+}
+
+#main {
+   background-color: white;
+   position: relative;
+   left: 0px;
+   right: 0px;
+   padding: 10px;
+}
+
+h1 {
+   color: #496370;
+   font-family: 'book antiqua', palatino; 
+   font-size: 40px;
+   text-align: center;
+   font-weight: normal;
+   padding: 20px;
+}
+
+hr {
+   height: 2px;
+   color: #496370;
+   background-color: #496370;
+   margin-bottom: 20px;
+   margin-top: 20px;
+   border: #496370;
+   width: 60%;
+}
+
+p {
+   text-align: center;
+   font-family: verdana, geneva;
+   font-size: 10pt;
+}
+
+input {
+   font-family: verdana, geneva;
+   font-size: 10pt;
+   width: 200px;
+   height:28px;
+   outline: none !important;
+   position: relative;
+}
+
+#filmDis {
+   width: 80%;
+   min-height: 400px;
+   background-color: #a6a6a6;
+   border: none;
+   border-radius:1px;
+   margin: auto;
+   box-shadow: 0px 0px 5px black;
+   text-align: center;
+}
+
+a {
+   font-family: verdana, geneva;
+   font-size: 10pt;
+   color: #343434;
+   cursor:pointer;
+   text-shadow: 1px 1px 1px darkgray;
+}
+
+#history ul {
+   padding: 0px;
+   margin: 0px;
+}
+
+#history li {
+   display: inline-block;
+   list-style-type: none;
+   width: 70px;
+   height: 17px;
+   margin: 5px;
+   text-align: center;
+   font-family: verdana, geneva;
+   font-size: 10pt;
+   color: #343434;
+   cursor:pointer;
+   text-shadow: 1px 1px 1px darkgray;
+}
+
+#history a:hover {
+   text-decoration: underline;
+}
+
+#history {
+  background-color: #a6a6a6;
+  padding: 10px;
+  font-family: verdana, geneva;
+  font-size: 10pt;
+  color: #343434;
+  position: absolute;
+  right: 0px;
+  top: 251px;
+  width: 8%;
+  border: none;
+  border-radius: 1px;
+  box-shadow: 0px 0px 5px black;
+  text-align: center;
+}
+
+@media (max-width: 940px) {
+#history {
+  position: relative;
+  width: 75%;
+  margin: auto;
+  padding: 10px;
+  top: 10px;
+}
+}
+
+.sr {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #dfdfdf) );
+	background:-moz-linear-gradient( center top, #ededed 5%, #dfdfdf 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#dfdfdf');
+	background-color:#ededed;
+	text-indent:0;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#777777;
+	font-family:arial;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	height:28px;
+	line-height:25px;
+	width:83px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 1px 0px #ffffff;
+  margin-left: 0px;
+}
+
+.sr:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #dfdfdf), color-stop(1, #ededed) );
+	background:-moz-linear-gradient( center top, #dfdfdf 5%, #ededed 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed');
+	background-color:#dfdfdf;
+}
+
+.sr:active {
+	position:relative;
+	top:1px;
+}
+
+.sr:hover, .sr:active, .sr:focus {
+   outline: 0;
+}
