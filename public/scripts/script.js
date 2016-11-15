@@ -1,3 +1,15 @@
+function errorMessage(message) {
+    var p = document.createElement("p"),
+        textError = document.createTextNode(message),
+        imageViewerChild = document.getElementById("filmDis").firstChild;
+
+    p.appendChild(textError);
+
+    document.getElementById("filmDis").removeChild(imageViewerChild)
+
+    document.getElementById("filmDis").appendChild(p);
+}
+
 /******************************
  * Creates Cookie
  ******************************/
@@ -39,11 +51,8 @@ function eraseCookie(cName) {
 }
 
 /*********************************
- * Search Films Function
- * Opens an XML, searches for
- * images stored in the resources
- * and returns the address to that
- * image.
+ * Search Films Function Opens an XML, searches for images stored in the resources
+ * and returns the address to that image.
  *********************************/
 function searchFilms(value) {
     var searchResult = new Array();
@@ -61,31 +70,64 @@ function searchFilms(value) {
     return "none";
 }
 
+/******************************
+ * Loads an image from the History tab on the side of
+ * the screen.
+ ******************************/
+function loadHis(number) {
+    // Searches for the number typed in the text box
+    var searchResult = searchFilms(number);
+    // Test result
+    if (searchResult == "none") {
+
+        errorMessage("That microfilm has been removed, sorry.");
+
+        return;
+    }
+
+    // If a match is found, it displays it to the screen in an image viewer
+    displayImg(searchResult);
+
+}
+
 /*****************
- * Loads Cookies
- * and creates the
- * history list.
+ * Loads Cookies and creates the history list.
  *****************/
 function loadHistory() {
-    // Clears the history list
-    document.querySelector("aside").getElementsByTagName("ul")[0].innerHTML = "";
+
+    var ul = document.createElement("ul");
 
     // Looks for Cookies of each microfilm
     for (var i = 0; i < records.length; i++) {
-        var tempFilm = records[i].number;
-        if (readCookie(tempFilm) !== null) {
-            document.querySelector("aside").getElementsByTagName("ul")[0].innerHTML +=
-                '<li style="display: inline-block; list-style-type: none; width: 75px; height: 17px; margin: 5px; text-align: center; font-family: verdana, geneva; font-size: 10pt; color: #343434; cursor:pointer;" onclick="loadHis(' + tempFilm + ')"><a>' + tempFilm + '</a></li>';
+
+        var tempFilmNumber = records[i].number;
+
+        if (readCookie(tempFilmNumber) !== null) {
+
+            var li = document.createElement("li"),
+                anchor = document.createElement("a"),
+                text = document.createTextNode(tempFilmNumber);
+
+            anchor.onclick = e => {
+                loadHis(tempFilmNumber);
+            };
+
+            anchor.appendChild(text);
+
+            li.appendChild(anchor);
+
+            ul.appendChild(li);
         }
     }
+
+    document.querySelector("aside").appendChild(ul);
+
     return "none";
 }
 
 /******************************
- * When search button is pushed
- * it searches for a microfilm,
- * displays it if found, or
- * error message if not, and
+ * When search button is pushed it searches for a microfilm,
+ * displays it if found, or error message if not, and
  * stores a link in a cookie.
  ******************************/
 function search() {
@@ -100,7 +142,9 @@ function search() {
     var searchResult = searchFilms(document.getElementById('film-id').value);
     // Test result
     if (searchResult == "none") {
-        document.getElementById("filmDis").innerHTML = '<p style="line-height: 400px; -webkit-touch-callout: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;">No microfilm found.</p>';
+
+        errorMessage("No Microfilm Found");
+
         // Resets the search box
         resetPlaceholder(document.getElementById('film-id'));
         return;
@@ -119,25 +163,6 @@ function search() {
 }
 
 /******************************
- * Loads an image from the
- * History tab on the side of
- * the screen.
- ******************************/
-function loadHis(number) {
-    // Searches for the number typed in the text box
-    var searchResult = searchFilms(number);
-    // Test result
-    if (searchResult == "none") {
-        document.getElementById("filmDis").innerHTML = '<p style="line-height: 400px; -webkit-touch-callout: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none;">That microfilm has been removed, sorry.</p>';
-        return;
-    }
-
-    // If a match is found, it displays it to the screen in an image viewer
-    displayImg(searchResult);
-
-}
-
-/******************************
  * This prepares the page.
  ******************************/
 function clearPlaceholder(e) {
@@ -153,7 +178,7 @@ function clearPlaceholder(e) {
 function fillPlaceholder(e) {
 
     var input = e.target || e.srcElement;
-    
+
     if (input.value === "") {
         input.style.color = "grey";
         input.value = "Type Film Number Here";
@@ -166,15 +191,28 @@ function resetPlaceholder(x) {
 }
 
 /******************************
- * Displays the image(s) in the
- * filmDis div.
+ * Displays the image(s) in the filmDis div.
  ******************************/
 function displayImg(searchResult) {
     for (var i = 0; i < searchResult.length; i++) {
+
+        var iframe = document.createElement("iframe"),
+            dist = document.getElementById("filmDis").firstChild;
+
         if (i == 0) {
-            document.getElementById("filmDis").innerHTML = '<iframe src="' + searchResult[i] + '" width="100%" height="400" frameborder="0" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>';
+
+            iframe.src = searchResult[i];
+
+            document.getElementById("filmDis").removeChild(dist);
+
+            document.getElementById("filmDis").appendChild(iframe);
+
         } else {
-            document.getElementById("filmDis").innerHTML += '<iframe src="' + searchResult[i] + '" width="100%" height="400" frameborder="0" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>';
+
+            iframe.src = searchResult[i];
+
+            document.getElementById("filmDis").appendChild(iframe);
+
         }
     }
 }
@@ -182,8 +220,7 @@ function displayImg(searchResult) {
 /*EVENTS*/
 
 /**********************************
- * Loads the history tab right when
- * the window opens.
+ * Loads the history tab right when the window opens.
  **********************************/
 window.onload = function () {
     loadHistory();
