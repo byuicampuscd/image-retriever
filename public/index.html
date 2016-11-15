@@ -11,21 +11,19 @@
 
     <main>
         <h1>Microfilm Retriever</h1>
-        <hr />
         <label>Search Films:
-            <input id="mfsb" style="color: grey;" onfocus="clearPlaceholder(this)" onblur="fillPlaceholder(this)" type="text" value="Type Film Number Here" />
-            <button class="sr" onclick="search()">Search</button>
+            <input id="film-id" type="text" value="Type Film Number Here" />
+            <input type="button" value="Search">
         </label>
-        <div id="filmDis"><img src="./images/mrIcon.png" border="0" alt="" title="" style="width: 180px; padding-top: 100px;" /></div>
+        <div id="filmDis"><img src="./images/mrIcon.png"></div>
     </main>
-    <aside>Search History:
-        <br />
-        <br />
-        <ul>&nbsp;</ul>
+    <aside>
+        <p>Search History:</p>
+        <ul></ul>
     </aside>
 
     <footer>
-        <script type="text/javascript" src="./dist/scripts.js"></script>
+        <script src="./dist/scripts.js"></script>
     </footer>
 
 </body>
