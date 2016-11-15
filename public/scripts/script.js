@@ -13,7 +13,7 @@ function errorMessage(message) {
 /******************************
  * Creates Cookie
  ******************************/
-function createCookie(cName, value, days) {
+function createCookie(filmNumber, value, days) {
     var expires;
     if (days) {
         // Gets todays date and adds the number of days cookie lasts
@@ -24,14 +24,14 @@ function createCookie(cName, value, days) {
         expires = "";
     }
     // Creates the cookie and stores it on computer
-    document.cookie = cName + "=" + value + expires + "; path=/";
+    document.cookie = filmNumber + "=" + value + expires + "; path=/";
 }
 
 /******************************
  * Reads a specified Cookie
  ******************************/
-function readCookie(cName) {
-    var nameEQ = cName + "=";
+function readCookie(filmNumber) {
+    var nameEQ = filmNumber + "=";
     var ca = document.cookie.split(';');
     for (var i = 0; i < ca.length; i++) {
         var c = ca[i];
@@ -46,8 +46,8 @@ function readCookie(cName) {
 /******************************
  * Erases a Specified Cookie
  ******************************/
-function eraseCookie(cName) {
-    createCookie(cName, "", -1);
+function eraseCookie(filmNumber) {
+    createCookie(filmNumber, "", -1);
 }
 
 /*********************************
@@ -55,13 +55,15 @@ function eraseCookie(cName) {
  * and returns the address to that image.
  *********************************/
 function searchFilms(value) {
-    var searchResult = new Array();
+    var searchResult = [];
 
     for (var i = 0; i < records.length; i++) {
+
         var recordNum = records[i].number;
-        if (recordNum == value) {
+
+        if (recordNum === value) {
             for (var j = 0; j < records[i].urls.length; j++) {
-                searchResult[j] = records[i].urls[j];
+                searchResult.push(records[i].urls[j]);
             }
             return searchResult;
         }
@@ -126,71 +128,6 @@ function loadHistory() {
 }
 
 /******************************
- * When search button is pushed it searches for a microfilm,
- * displays it if found, or error message if not, and
- * stores a link in a cookie.
- ******************************/
-function search() {
-    // Makes sure that the function isn't entered by accident
-    if ((document.getElementById('film-id').value == null) ||
-        (document.getElementById('film-id').value == "") ||
-        (document.getElementById('film-id').value == "Type Film Number Here")) {
-        return;
-    }
-
-    // Searches for the number typed in the text box
-    var searchResult = searchFilms(document.getElementById('film-id').value);
-    // Test result
-    if (searchResult == "none") {
-
-        errorMessage("No Microfilm Found");
-
-        // Resets the search box
-        resetPlaceholder(document.getElementById('film-id'));
-        return;
-    }
-
-    // If a match is found, it displays it to the screen in an image viewer
-    displayImg(searchResult);
-
-    // Creates a cookie with the name of the microfilm number
-    createCookie(document.getElementById('film-id').value, searchResult, 120);
-
-    loadHistory();
-
-    // Resets the search box
-    resetPlaceholder(document.getElementById('film-id'));
-}
-
-/******************************
- * This prepares the page.
- ******************************/
-function clearPlaceholder(e) {
-
-    var input = e.target || e.srcElement;
-
-    if (input.value == "Type Film Number Here") {
-        input.style.color = "black";
-        input.value = "";
-    }
-}
-
-function fillPlaceholder(e) {
-
-    var input = e.target || e.srcElement;
-
-    if (input.value === "") {
-        input.style.color = "grey";
-        input.value = "Type Film Number Here";
-    }
-}
-
-function resetPlaceholder(x) {
-    x.style.color = "grey";
-    x.value = "Type Film Number Here";
-}
-
-/******************************
  * Displays the image(s) in the filmDis div.
  ******************************/
 function displayImg(searchResult) {
@@ -217,6 +154,45 @@ function displayImg(searchResult) {
     }
 }
 
+/******************************
+ * When search button is pushed it searches for a microfilm,
+ * displays it if found, or error message if not, and
+ * stores a link in a cookie.
+ ******************************/
+function search() {
+
+    var filmInput = document.getElementById('film-id').value;
+
+    // Makes sure that the function isn't entered by accident
+    if (filmInput === null || filmInput === "" || filmInput === "Type Film Number Here") {
+        return;
+    }
+
+    // Searches for the number typed in the text box
+    var searchResult = searchFilms(filmInput);
+
+    // Test result
+    if (searchResult === "none") {
+
+        errorMessage("No Microfilm Found");
+
+        // Resets the search box
+        filmInput = "";
+        return;
+    }
+
+    // If a match is found, it displays it to the screen in an image viewer
+    displayImg(searchResult);
+
+    // Creates a cookie with the name of the microfilm number
+    createCookie(filmInput, searchResult, 120);
+
+    loadHistory();
+
+    // Resets the search box
+    filmInput = "";
+}
+
 /*EVENTS*/
 
 /**********************************
@@ -226,6 +202,4 @@ window.onload = function () {
     loadHistory();
 };
 
-document.querySelector("#film-id").onfocus = clearPlaceholder;
-document.querySelector("#film-id").onblur = fillPlaceholder;
 document.querySelector("input[type='button']").onclick = search;
