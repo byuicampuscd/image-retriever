@@ -1,9 +1,6 @@
 @import './partials/_reset.scss';
 main {
     background-color: white;
-    position: relative;
-    left: 0px;
-    right: 0px;
     padding: 10px;
 }
 
@@ -27,7 +24,6 @@ input[type="text"] {
     width: 200px;
     height: 28px;
     outline: none !important;
-    position: relative;
     color: grey;
 }
 
@@ -37,7 +33,8 @@ input[type="button"] {
     background-color: steelblue;
     border: none;
     color: white;
-    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.5);
+    margin-left: 5px;
+    box-shadow: 0px 0px 5px 0.5px #000000;
     &:hover {
         background-color: #4077a5;
     }
@@ -53,7 +50,7 @@ input[type="button"] {
     border: none;
     border-radius: 1px;
     margin: auto;
-    box-shadow: 0px 0px 5px black;
+    box-shadow: 0px 0px 10px 0.5px #000000;
     text-align: center;
     img {
         width: 180px;
@@ -80,49 +77,32 @@ a {
     text-shadow: 1px 1px 1px darkgray;
 }
 
-aside ul {
-    padding: 0px;
-    margin: 0px;
-}
-
-aside li {
-    display: inline-block;
-    list-style-type: none;
-    width: 75px;
-    height: 17px;
-    margin: 5px;
-    text-align: center;
-    font-size: 10pt;
-    color: #343434;
-    cursor: pointer;
-    text-shadow: 1px 1px 1px darkgray;
-}
-
-aside a:hover {
-    text-decoration: underline;
-}
-
 aside {
     background-color: #a6a6a6;
+    position: relative;
+    width: 75%;
+    margin: auto;
+    margin-bottom: 40px;
     padding: 10px;
-    font-size: 10pt;
-    color: #343434;
-    position: absolute;
-    right: 0px;
-    top: 251px;
-    width: 8%;
-    border: none;
-    border-radius: 1px;
-    box-shadow: 0px 0px 5px black;
-    text-align: center;
-}
-
-@media (max-width: 940px) {
-    aside {
-        position: relative;
-        width: 75%;
-        margin: auto;
-        padding: 10px;
-        top: 10px;
+    top: 10px;
+    box-shadow: 0px 0px 10px 0.5px #000000;
+    a:hover {
+        text-decoration: underline;
+    }
+    ul {
+        padding: 0px;
+        margin: 0px;
+        li {
+            display: inline-block;
+            list-style-type: none;
+            width: 75px;
+            height: 17px;
+            margin: 5px;
+            text-align: center;
+            font-size: 10pt;
+            color: #343434;
+            cursor: pointer;
+            text-shadow: 1px 1px 1px darkgray;
+        }
     }
 }

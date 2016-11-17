@@ -79,7 +79,7 @@ var records = [
 }, {
         "title": "Index to marriages 1951-1957 and marriage records 1951-1958, Los Angeles County, California",
         "number": "1283808",
-        "urls": ["https://content.byui.edu/integ/gen/036a3176-c12e-422a-bd0a-aac8f6c868f3/033.jpg"]
+        "urls": ["https://content.byui.edu/integ/gen/036a3176-c12e-422a-bd0a-aac8f6c868f3/33.jpg"]
 }, {
         "title": "book 162 page 5",
         "number": "1033228",
