@@ -67,6 +67,25 @@
         return "none";
     }
 
+    function printr(e) {
+        let parent = e.target.parentElement || e.srcElement.parentElement,
+            microfilm = parent.firstChild;
+
+        console.log(microfilm);
+    }
+
+    function downloadr(e) {
+        let parent = e.target.parentElement || e.srcElement.parentElement,
+            microfilm = parent.firstChild,
+            hrefr = microfilm.src,
+            anchor = document.createElement("a");
+
+        anchor.href = hrefr;
+        anchor.download = true;
+
+        anchor.click();
+    }
+
     /******************************
      * Displays the image(s) in the filmDis div.
      ******************************/
@@ -78,20 +97,40 @@
 
         for (let i = 0; i < searchResult.length; i++) {
 
-            let iframe = document.createElement("iframe");
+            let iframe = document.createElement("iframe"),
+                div = document.createElement("div"),
+                print = document.createElement("input"),
+                download = document.createElement("input");
+
+            print.onclick = printr;
+            download.onclick = downloadr;
+
+            print.value = "Print";
+            download.value = "Download";
+
+            print.type = "button";
+            download.type = "button";
+
+            print.className = "print";
+            download.className = "download";
+
+            div.className = "image";
+
+            div.appendChild(iframe);
+            div.appendChild(print);
+            div.appendChild(download);
 
             if (i === 0) {
 
                 iframe.src = searchResult[i];
 
-                filmDis.appendChild(iframe);
+                filmDis.appendChild(div);
 
             } else {
 
                 iframe.src = searchResult[i];
 
-                filmDis.appendChild(iframe);
-
+                filmDis.appendChild(div);
             }
         }
     }
@@ -100,7 +139,7 @@
      * Loads an image from the History tab on the side of
      * the screen.
      ******************************/
-    function loadHis(number) {
+    function loadImageSet(number) {
         // Searches for the number typed in the text box
         let searchResult = searchFilms(number);
         // Test result
@@ -137,7 +176,7 @@
                     text = document.createTextNode(tempFilmNumber);
 
                 anchor.onclick = e => {
-                    loadHis(e.target.innerText);
+                    loadImageSet(e.target.innerText);
                 };
 
                 anchor.appendChild(text);
