@@ -67,11 +67,40 @@
         return "none";
     }
 
-    function printr(e) {
-        let parent = e.target.parentElement || e.srcElement.parentElement,
-            microfilm = parent.firstChild;
+    function writePrintr(source) {
+        return "<html><head><script>function step1(){\n" +
+            "setTimeout('step2()', 10);}\n" +
+            "function step2(){window.print();window.close()}\n" +
+            "</scri" + "pt></head><body onload='step1()'>\n" +
+            "<img src='" + source + "' /></body></html>";
+    }
 
-        console.log(microfilm);
+    function printr(e) {
+
+        let parent = e.target.parentElement || e.srcElement.parentElement,
+            microfilm = parent.firstChild,
+            hrefr = microfilm.src,
+            filetype = hrefr.split('.').pop(),
+            PageLink = "about:blank";
+
+        if (filetype === "jpg" || filetype === "png") {
+            var pwin = window.open(PageLink, "_blank");
+            pwin.document.open();
+            pwin.document.write(writePrintr(hrefr));
+            pwin.document.close();
+        } else if (filetype === "pdf") {
+            let errDiv = parent.lastChild,
+                errText = document.createTextNode("Microfilm is a PDF.  Print PDF from PDF view.  If that does not work then download it to then print it."),
+                errPara = document.createElement("p");
+
+            errPara.appendChild(errText);
+            errDiv.appendChild(errPara);
+
+            setTimeout(() => {
+                errDiv.removeChild(errPara);
+            }, 5000);
+        }
+
     }
 
     function downloadr(e) {
@@ -100,7 +129,9 @@
             let iframe = document.createElement("iframe"),
                 div = document.createElement("div"),
                 print = document.createElement("input"),
-                download = document.createElement("input");
+                download = document.createElement("input"),
+                filetype = searchResult[i].split('.').pop(),
+                errDiv = document.createElement("div");
 
             print.onclick = printr;
             download.onclick = downloadr;
@@ -117,8 +148,13 @@
             div.className = "image";
 
             div.appendChild(iframe);
-            div.appendChild(print);
-            div.appendChild(download);
+
+            if (filetype !== "pdf") {
+                iframe.style.width = "80%";
+                div.appendChild(print);
+                div.appendChild(download);
+                div.appendChild(errDiv);
+            }
 
             if (i === 0) {
 
