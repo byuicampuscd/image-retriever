@@ -1,44 +1,37 @@
 (function () {
 
     function setLocalStorage(filmInput, searchResult) {
-        console.log(filmInput, searchResult);
-        localStorage[filmInput] = JSON.stringify(searchResult);
+
+        let retrievedFiles,
+            saver;
+
+        if (localStorage["imageRetrieverImageFiles"]) {
+            console.log("exisit");
+            retrievedFiles = JSON.parse(localStorage["imageRetrieverImageFiles"]);
+            retrievedFiles[filmInput] = searchResult;
+            localStorage["imageRetrieverImageFiles"] = JSON.stringify(retrievedFiles);
+        } else {
+            console.log("no exisit", searchResult);
+
+            saver = {};
+            saver[filmInput] = searchResult;
+
+            localStorage["imageRetrieverImageFiles"] = JSON.stringify(saver);
+        }
+
     }
 
     function readLocalStorage(tempFilmNumber) {
-        var picArray;
+        let picArray;
 
-        try {
-            picArray = JSON.parse(localStorage[tempFilmNumber]);
-        } catch (e) {
-            //            console.log(e);
-        }
+        if (localStorage["imageRetrieverImageFiles"]) {
 
-        if (picArray) {
-            return picArray;
+            picArray = JSON.parse(localStorage["imageRetrieverImageFiles"]);
+
+            return picArray[tempFilmNumber];
         } else {
             return null;
         }
-    }
-
-
-    function readCookie(filmNumber) {
-        var nameEQ = filmNumber + "=",
-            ca = document.cookie.split(';');
-
-        console.log(document.cookie, ca);
-
-        for (var i = 0; i < ca.length; i++) {
-            var c = ca[i];
-            // Removes spaces before cookie stored in the string of multiple cookies
-            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-            // Returns the value if cookie is found
-
-            console.log(c.substring(1, c.length))
-
-            if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
-        }
-        return null;
     }
 
     function errorMessage(message) {
@@ -75,12 +68,41 @@
     }
 
     /******************************
+     * Displays the image(s) in the filmDis div.
+     ******************************/
+    function displayImg(searchResult) {
+
+        let filmDis = document.getElementById("filmDis");
+
+        filmDis.innerHTML = "";
+
+        for (let i = 0; i < searchResult.length; i++) {
+
+            let iframe = document.createElement("iframe");
+
+            if (i === 0) {
+
+                iframe.src = searchResult[i];
+
+                filmDis.appendChild(iframe);
+
+            } else {
+
+                iframe.src = searchResult[i];
+
+                filmDis.appendChild(iframe);
+
+            }
+        }
+    }
+
+    /******************************
      * Loads an image from the History tab on the side of
      * the screen.
      ******************************/
     function loadHis(number) {
         // Searches for the number typed in the text box
-        var searchResult = searchFilms(number);
+        let searchResult = searchFilms(number);
         // Test result
         if (searchResult === "none") {
 
@@ -108,7 +130,7 @@
 
             var tempFilmNumber = records[i].number;
 
-            if (readLocalStorage(tempFilmNumber) !== null) {
+            if (readLocalStorage(tempFilmNumber)) {
 
                 var li = document.createElement("li"),
                     anchor = document.createElement("a"),
@@ -123,36 +145,6 @@
                 li.appendChild(anchor);
 
                 ul.appendChild(li);
-            }
-        }
-
-        return "none";
-    }
-
-    /******************************
-     * Displays the image(s) in the filmDis div.
-     ******************************/
-    function displayImg(searchResult) {
-
-        for (var i = 0; i < searchResult.length; i++) {
-
-            var iframe = document.createElement("iframe"),
-                dist = document.getElementById("filmDis").firstChild;
-
-            if (i == 0) {
-
-                iframe.src = searchResult[i];
-
-                document.getElementById("filmDis").removeChild(dist);
-
-                document.getElementById("filmDis").appendChild(iframe);
-
-            } else {
-
-                iframe.src = searchResult[i];
-
-                document.getElementById("filmDis").appendChild(iframe);
-
             }
         }
     }
@@ -197,6 +189,11 @@
     }
 
     /*EVENTS*/
+
+    document.querySelector("#clear").onclick = e => {
+        localStorage["imageRetrieverImageFiles"] = "";
+        loadHistory();
+    }
 
     /**********************************
      * Loads the history tab right when the window opens.
