@@ -17,7 +17,7 @@ The FHGEN courses of BYU-Idaho that use this application will instruct the user 
 6. Print images
 
 ## Demo
-Here is the (demo)[https://content.byui.edu/file/92cc88d9-a083-4f8a-b8f1-ea8d2608f8fc/3/image-retriever.zip/image-retriever/index.html] found in BYU-Idaho CMS.
+Here is the [demo](https://content.byui.edu/file/92cc88d9-a083-4f8a-b8f1-ea8d2608f8fc/3/image-retriever.zip/image-retriever/index.html) found in BYU-Idaho CMS.
 
 ### For the Developer
 The image retriever was recently updated as of 11/21/2016.  This version of the image retriever is compiled through Gulpjs and it utilizes Vanilla JS.  To redevelop this application, clone the repository and open the cloned repository in the command line.  Make sure you have Gulp globally installed.  A global gulp installation is `npm install -g gulp`.  Afterwards, install all the dependencies with `npm install`.  Then you may start the development with the gulp tasks found in gulpfile.js.
