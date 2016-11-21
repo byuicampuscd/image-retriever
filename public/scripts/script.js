@@ -35,15 +35,15 @@
     }
 
     function errorMessage(message) {
-        var p = document.createElement("p"),
+        var p = document.createElement("h2"),
             textError = document.createTextNode(message),
-            imageViewerChild = document.getElementById("filmDis").firstChild;
+            imageViewerChild = document.querySelector(".image");
+
+        imageViewerChild.innerHTML = "";
 
         p.appendChild(textError);
 
-        document.getElementById("filmDis").removeChild(imageViewerChild)
-
-        document.getElementById("filmDis").appendChild(p);
+        imageViewerChild.appendChild(p);
     }
 
     /*********************************
@@ -115,6 +115,15 @@
         anchor.click();
     }
 
+    function expandImager(e) {
+
+        let parent = e.target.parentElement || e.srcElement.parentElement,
+            microfilm = parent.firstChild,
+            hrefr = microfilm.src;
+
+        window.open(hrefr, "_blank");
+    }
+
     /******************************
      * Displays the image(s) in the filmDis div.
      ******************************/
@@ -130,44 +139,43 @@
                 div = document.createElement("div"),
                 print = document.createElement("input"),
                 download = document.createElement("input"),
+                expandImage = document.createElement("input"),
                 filetype = searchResult[i].split('.').pop(),
                 errDiv = document.createElement("div");
 
             print.onclick = printr;
             download.onclick = downloadr;
+            expandImage.onclick = expandImager;
 
             print.value = "Print";
             download.value = "Download";
+            expandImage.value = "Expand Image";
 
             print.type = "button";
             download.type = "button";
+            expandImage.type = "button";
 
             print.className = "print";
             download.className = "download";
+            expandImage.className = "expandImager";
 
             div.className = "image";
 
             div.appendChild(iframe);
 
             if (filetype !== "pdf") {
-                iframe.style.width = "80%";
                 div.appendChild(print);
                 div.appendChild(download);
+                div.appendChild(expandImage);
                 div.appendChild(errDiv);
             }
 
             if (i === 0) {
-
                 iframe.src = searchResult[i];
-
-                filmDis.appendChild(div);
-
             } else {
-
                 iframe.src = searchResult[i];
-
-                filmDis.appendChild(div);
             }
+                filmDis.appendChild(div);
         }
     }
 
@@ -231,7 +239,7 @@
      ******************************/
     function search() {
 
-        var filmInput = document.getElementById('film-id').value;
+        var filmInput = (document.getElementById('film-id').value).trim();
 
         // Makes sure that the function isn't entered by accident
         if (filmInput === null || filmInput === "" || filmInput === "Type Film Number Here") {
