@@ -72,7 +72,7 @@
             "setTimeout('step2()', 10);}\n" +
             "function step2(){window.print();window.close()}\n" +
             "</scri" + "pt></head><body onload='step1()'>\n" +
-            "<img src='" + source + "' /></body></html>";
+            "<img width='100%' src='" + source + "' /></body></html>";
     }
 
     function printr(e) {

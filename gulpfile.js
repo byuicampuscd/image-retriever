@@ -106,7 +106,7 @@ gulp.task('clean', function () {
 /*Zip up the public directory for sharing :)*/
 gulp.task('export', ['production'], function () {
     return gulp.src('public/**/*')
-        .pipe(zip('website.zip'))
+        .pipe(zip('image-retriever.zip'))
         .pipe(gulp.dest('./'))
 })
 
