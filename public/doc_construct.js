@@ -18,7 +18,13 @@
     }
 
     function baseHTML() {
-        document.querySelector("#article").innerHTML = `
+
+        var article = document.querySelector("#article"),
+            microDiv = document.createElement("div");
+
+        //Try not to override the copyright bar.
+
+        microDiv.innerHTML = `
     <main>
         <h1>Microfilm Retriever</h1>
         <label>Search Films:
@@ -36,6 +42,8 @@
             </div>
         </div>
     </main>`;
+
+        article.appendChild(microDiv);
     }
 
     baseHTML();
