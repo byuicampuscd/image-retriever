@@ -23,7 +23,7 @@ Here is the [demo](https://content.byui.edu/file/92cc88d9-a083-4f8a-b8f1-ea8d260
 1. Download the scripts.js file (right click>save link as...) from the image retriever tool in Equella.
 2. Input the information to the scripts.js file according to the setup.
 3. Double and Triple check your work to make sure everything looks correct. 
-4. See that each item has a title, call number, and a link to the file. The link should have version 0 as well as integ/gen insted of file.
+4. See that each item has a title, call number, and a link to the file. The link should have version 0 as well as integ/gen instead of file inside the URL.
 5. Open the image retriever tool in Equella.
 6. When open, choose "Create a new version" on the right.
 7. Choose to replace the scripts.js file(note that this is the plural version)
