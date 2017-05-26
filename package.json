@@ -10,8 +10,6 @@
     "type": "git",
     "url": "git+https://github.com/byuicampuscd/image-retriever.git"
   },
-  "author": "Andrew Gremlich",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/byuicampuscd/image-retriever/issues"
   },
@@ -37,5 +35,7 @@
   },
   "dependencies": {
     "static-server": "^2.0.3"
-  }
+  },
+  "author": "Andrew Gremlich",
+  "license": "MIT"
 }
